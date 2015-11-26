@@ -1,0 +1,26 @@
+using UnityEngine;
+using System.Collections;
+
+public class Shooty_shooty_gun_gun : MonoBehaviour {
+
+	public GameObject player;
+			Vector3 diff;
+
+
+	// Use this for initialization
+	void Start () {
+
+		player = GameObject.Find("Player");
+		diff = player.transform.position - transform.position;
+
+	}
+	
+	// Update is called once per frame
+	void LateUpdate () {
+
+		float editAngle = player.transform.eulerAngles.y;
+		Quaternion rotation = Quaternion.Euler(0, editAngle, 0);
+		transform.position = player.transform.position - (rotation * diff);
+		transform.LookAt(player.transform);
+	}
+}
