@@ -1,0 +1,30 @@
+using UnityEngine;
+using System.Collections;
+
+public class FreeRoamFish : MonoBehaviour {
+	
+	public NavMeshAgent nAgent;
+	//public GameObject FWaypoint;
+	Vector3 TargetPosition;
+	public Animation anim;
+
+     
+
+	// Use this for initialization
+	void Start () {
+		nAgent = GetComponent<NavMeshAgent>();
+		anim.Play("Swim");
+
+	}
+	
+	
+	// Update is called once per frame
+	void Update () {
+
+		TargetPosition = GameObject.Find("FWaypoint").transform.position;
+		nAgent.SetDestination(TargetPosition);
+
+
+		
+	}
+}
