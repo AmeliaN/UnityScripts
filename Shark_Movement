@@ -1,0 +1,57 @@
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+public class Movement : MonoBehaviour {
+
+	public NavMeshAgent  nAgent;
+	public Vector3       desiredPosition;
+	public List<Vector3> waypoints;
+	public int           counter;
+	public string        currentState;
+	public Animation 	 anim;
+
+	// Use this for initialization
+	void Start () {
+
+		counter = 0;
+		nAgent = GetComponent<NavMeshAgent>();
+		waypoints = new List<Vector3>();
+		waypoints.Add(GameObject.Find("WaypointOne").transform.position);
+		waypoints.Add(GameObject.Find("WaypointTwo").transform.position);
+		waypoints.Add(GameObject.Find("WaypointThree").transform.position);
+		waypoints.Add(GameObject.Find("WaypointFour").transform.position);
+		waypoints.Add(GameObject.Find("WaypointFive").transform.position);
+		desiredPosition = waypoints[0];
+		anim = GameObject.Find("SharkmanFinal").GetComponent<Animation>();
+
+
+	}
+
+	void Patrol(){
+
+		anim.Play("Swim");
+		if((Mathf.Abs(transform.position.x - waypoints[counter].x) < 0.5) && (Mathf.Abs(transform.position.z - waypoints[counter].z) < 0.5)) {
+
+				counter += 1;
+				
+				if (counter  == waypoints.Count) {
+					counter = 0;
+				}
+		}
+		desiredPosition = waypoints[counter];
+
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+		currentState = GetComponent<stateMachine>().state;
+		if (currentState == "PATROL"){
+			Patrol();
+		}
+
+		nAgent.SetDestination(desiredPosition);
+	
+	}
+}
