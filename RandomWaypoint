@@ -1,0 +1,27 @@
+using UnityEngine;
+using System.Collections;
+
+public class WaypointRandom : MonoBehaviour {
+	public GameObject FWaypoint;
+	public GameObject Fish;
+
+
+	// Use this for initialization
+	void Start () {
+
+		Fish = GameObject.Find("cruscarp");
+		InvokeRepeating("Move", 2, 3f);
+	}
+	void Move(){
+		transform.position = (new Vector3(Random.Range(-40.0f, 40.0f), 0, Random.Range(-5.0f, 5.0f) ));
+
+	}
+	
+
+
+	// Update is called once per frame
+	void Update () {
+
+	
+	}
+}
