@@ -1,0 +1,68 @@
+using UnityEngine;
+using System.Collections;
+
+public class Attack : MonoBehaviour{
+
+	public float baseAttack;
+	public float sp;
+	public float random;
+	
+	void Start(){
+		baseAttack = 3f;
+		sp = 100;
+
+	}
+
+	void specialPoints(){
+
+	}
+
+	void getRandom(){
+		//random = Random.Range(0,5);
+
+	}
+
+	void normalAttack(){
+		//This will deal the base amount of damage
+		doDamage(baseAttack)*(Random.Range(0,3));
+
+	}
+
+	void midAttack(){
+		//This will deal the base attack by three, and the function below will 
+		//deal 7 times the amount.
+		//the part at the end of the attack line will randomise the multiplier between 0 and three
+		if sp > 20:
+			midAttack = (baseAttack * 3 * (Random.Range(0,3)));
+			doDamage(midAttack);
+			sp -= 20;
+		else:
+			print("Not enough Power!!!");
+
+	}
+
+	void bigAttack(){
+		if sp > 50:
+			bigAttack = (baseAttack * 7 * (Random.Range(0,3)));
+			doDamage(bigAttack);
+			sp-=50;
+		else:
+			print("Not Enough Power!!!");
+	}
+
+	void doDamage(float attackValue){
+		GetComponent<Enemy>.health();
+		health -= attackValue;
+
+
+
+
+	}
+
+	void Update(){
+
+
+	}
+
+
+}
